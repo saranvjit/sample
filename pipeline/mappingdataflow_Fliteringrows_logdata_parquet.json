@@ -1,0 +1,41 @@
+{
+	"name": "mappingdataflow_Fliteringrows_logdata_parquet",
+	"properties": {
+		"activities": [
+			{
+				"name": "dtFilteringNULLvalues",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "dataflow_logdata_parquet_filtering rows",
+						"type": "DataFlowReference"
+					},
+					"staging": {
+						"linkedService": {
+							"referenceName": "datagen2storage1988_service",
+							"type": "LinkedServiceReference"
+						},
+						"folderPath": "staging"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-09-25T16:40:28Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

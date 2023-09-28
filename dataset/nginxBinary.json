@@ -1,0 +1,18 @@
+{
+	"name": "nginxBinary",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "datagen2storage1988_service",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "nginx"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

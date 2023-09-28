@@ -1,0 +1,64 @@
+{
+	"name": "logdatajson",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "synapseanalytics1988_pooldb_service",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "correlationid",
+				"type": "varchar"
+			},
+			{
+				"name": "operationname",
+				"type": "varchar"
+			},
+			{
+				"name": "status",
+				"type": "varchar"
+			},
+			{
+				"name": "Eventcategory",
+				"type": "varchar"
+			},
+			{
+				"name": "Level",
+				"type": "varchar"
+			},
+			{
+				"name": "time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "subscription",
+				"type": "varchar"
+			},
+			{
+				"name": "EventInitiatedBy",
+				"type": "varchar"
+			},
+			{
+				"name": "Resourcetype",
+				"type": "varchar"
+			},
+			{
+				"name": "resourcegroup",
+				"type": "varchar"
+			},
+			{
+				"name": "resource",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "logdata_json"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

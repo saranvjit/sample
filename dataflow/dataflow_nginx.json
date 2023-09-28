@@ -1,0 +1,87 @@
+{
+	"name": "dataflow_nginx",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "accesslogs",
+						"type": "DatasetReference"
+					},
+					"name": "accesslogsstream"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "accesslogs_pooldb",
+						"type": "DatasetReference"
+					},
+					"name": "accesslogssink"
+				}
+			],
+			"transformations": [
+				{
+					"name": "selectcolumns"
+				},
+				{
+					"name": "timecolumn"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          {_col0_} as string,",
+				"          {_col1_} as string,",
+				"          {_col2_} as string,",
+				"          {_col3_} as string,",
+				"          {_col4_} as string,",
+				"          {_col5_} as string,",
+				"          {_col6_} as short,",
+				"          {_col7_} as short,",
+				"          {_col8_} as string,",
+				"          {_col9_} as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> accesslogsstream",
+				"accesslogsstream select(mapColumn(",
+				"          Remote_addr = {_col0_},",
+				"          Time_local = {_col3_},",
+				"          Request = {_col5_},",
+				"          Status = {_col6_},",
+				"          Bytes = {_col7_}",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectcolumns",
+				"selectcolumns derive(Time_local = substring(Time_local,2,length(Time_local)-1)) ~> timecolumn",
+				"timecolumn sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Remote_addr as string,",
+				"          Time_local as string,",
+				"          Request as string,",
+				"          Status as integer,",
+				"          Bytes as integer",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: true,",
+				"     allowCopyCommand: true,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          Remote_addr,",
+				"          Time_local,",
+				"          Request,",
+				"          Status,",
+				"          Bytes",
+				"     )) ~> accesslogssink"
+			]
+		}
+	}
+}

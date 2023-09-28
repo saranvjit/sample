@@ -1,0 +1,89 @@
+{
+	"name": "dataflow_logdata_parquet_filtering rows",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "logdata_Parquet",
+						"type": "DatasetReference"
+					},
+					"name": "logdatadataparquetstream"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "pooldb_logdata_parquet",
+						"type": "DatasetReference"
+					},
+					"name": "logdataparquetpooldbstream"
+				}
+			],
+			"transformations": [
+				{
+					"name": "filterNULLvalues"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Correlationid as string,",
+				"          Operationname as string,",
+				"          Status as string,",
+				"          Eventcategory as string,",
+				"          Level as string,",
+				"          Time as timestamp,",
+				"          Subscription as string,",
+				"          Eventinitiatedby as string,",
+				"          Resourcetype as string,",
+				"          Resourcegroup as string,",
+				"          Resource as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'parquet') ~> logdatadataparquetstream",
+				"logdatadataparquetstream filter(!(isNull({Resourcegroup}))) ~> filterNULLvalues",
+				"filterNULLvalues sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          correlationid as string,",
+				"          operationname as string,",
+				"          status as string,",
+				"          Eventcategory as string,",
+				"          Level as string,",
+				"          time as timestamp,",
+				"          subscription as string,",
+				"          EventInitiatedBy as string,",
+				"          Resourcetype as string,",
+				"          resourcegroup as string,",
+				"          resource as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: true,",
+				"     allowCopyCommand: true,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          correlationid = Correlationid,",
+				"          operationname = Operationname,",
+				"          status = Status,",
+				"          Eventcategory,",
+				"          Level,",
+				"          time = Time,",
+				"          subscription = Subscription,",
+				"          EventInitiatedBy = Eventinitiatedby,",
+				"          Resourcetype,",
+				"          resourcegroup = Resourcegroup,",
+				"          resource = Resource",
+				"     )) ~> logdataparquetpooldbstream"
+			]
+		}
+	}
+}

@@ -1,0 +1,12 @@
+{
+	"name": "synapseanalytics1988_pooldb_service",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDW",
+		"typeProperties": {
+			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=synapseanalytics1988.sql.azuresynapse.net;initial catalog=SQLpooldb;user id=sqladminuser",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEIwNkZCNTZGLTQ0NUUtNDFEQy1CRjJDLUIwNzhGRTNGNTM5OF9iODkyYWI0Yi0zNTNlLTQ1MjgtYmMxMC02YTU5NGRhZDJmNWQiDQp9"
+		}
+	}
+}

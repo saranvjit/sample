@@ -1,0 +1,57 @@
+{
+	"name": "Json",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "datagen2storage1988_service",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "part-00000-ce1f2a67-a999-4cbf-9f8b-5f20ce8c0243-c000.json",
+				"fileSystem": "json"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"Correlationid": {
+					"type": "string"
+				},
+				"Operationname": {
+					"type": "string"
+				},
+				"Status": {
+					"type": "string"
+				},
+				"Eventcategory": {
+					"type": "string"
+				},
+				"Level": {
+					"type": "string"
+				},
+				"Time": {
+					"type": "string"
+				},
+				"Subscription": {
+					"type": "string"
+				},
+				"Eventinitiatedby": {
+					"type": "string"
+				},
+				"Resourcetype": {
+					"type": "string"
+				},
+				"Resourcegroup": {
+					"type": "string"
+				},
+				"Resource": {
+					"type": "string"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

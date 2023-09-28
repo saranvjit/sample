@@ -1,0 +1,9 @@
+{
+	"name": "kanshidatafactory1988",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "52c578f8-d057-489f-b657-7252809758a0",
+		"tenantId": "b77847c1-337d-45de-b73e-898bdb2a94b7"
+	}
+}

@@ -1,0 +1,19 @@
+{
+	"name": "logdata_json",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "datagen2storage1988_service",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "json"
+			}
+		},
+		"schema": {}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
